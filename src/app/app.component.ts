@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-http-client';
+  showConfig = true;
+
+  toggleConfig() { this.showConfig = !this.showConfig; }
+  
+
 }
