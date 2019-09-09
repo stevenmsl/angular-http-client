@@ -25,7 +25,8 @@ export class ConfigComponent {
         this.headers = undefined;    
     }
     showConfig() {
-        this.showConfig_v1();
+        this.showConfig_v2();
+        //this.showConfig_v1();
     }
 
     showConfig_v1() {
@@ -34,8 +35,29 @@ export class ConfigComponent {
             this.config = {
                 heroesUrl: data['heroesUrl'],
                 textfile: data['textfile']
-            });
-    
+            }); 
+    }
+
+    //... property spread notation
+    showConfig_v2() {
+        this.configService.getConfig_2()
+        .subscribe((data: Config) => this.config = {...data});        
+    }
+
+    showConfigResponse() {
+        this.configService.getConfigResponse()
+        // resp is of type `HttpResponse<Config>`
+        .subscribe(resp => {
+            const keys = resp.headers.keys();
+            this.headers = keys.map(key =>
+                `${key}: ${resp.headers.get(key)}`);
+            //access the body directly, which is typed as 'Config'.
+            this.config = { ... resp.body};     
+        })
+    }
+
+    makeError() {
+
     }
 
 }
