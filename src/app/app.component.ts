@@ -8,8 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-http-client';
   showConfig = true;
+  showSearch = true;
 
   toggleConfig() { this.showConfig = !this.showConfig; }
-  
+  toggleSearch() { this.showSearch = !this.showSearch; }
 
 }

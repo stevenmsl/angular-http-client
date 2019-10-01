@@ -13,15 +13,19 @@ import { AuthService } from './auth.service';
 
 import { ConfigComponent } from './config/config.component';
 import { MessagesComponent } from './messages/messages.component';
+import { PackageSearchComponent } from './package-search/package-search.component';
 
+import { HttpErrorHandler } from './http-error-handler.service';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { MessageService } from './message.service';
+import { RequestCache, RequestCacheWithMap } from './request-cache.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfigComponent,
-    MessagesComponent
+    MessagesComponent,
+    PackageSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,10 @@ import { MessageService } from './message.service';
   ],
   providers: [
     AuthService,
+    HttpErrorHandler,
     MessageService,
+    //RequestCache is a abstract class 
+    { provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
