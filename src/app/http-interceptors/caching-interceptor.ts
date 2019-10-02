@@ -29,9 +29,18 @@ export class CachingInterceptor implements HttpInterceptor {
         const cachedResponse = this.cache.get(req);
         //cache-then-refresh
         if (req.headers.get('x-refresh')) {
-            const results$ = sendRequest(req, next, this.cache);
-            //pipe is used for composing operators
-            //startWith – emit the given value first. So the cached response will be emitted first 
+            const results$ = sendRequest(req, next, this.cache); //update cache with the response received 
+            /*
+            The HttpClient.get() method normally returns an observable that either emits the data 
+            or an error. Some folks describe it as a "one and done" observable.
+
+            How to return a multi-valued Observable instead -
+            returns an observable that immediately emits the cached response, sends the request to the NPM web API anyway, 
+            and emits again later with the updated search results.
+            
+            pipe method is used for composing operators
+            startWith – emit the given value first. So the cached response will be emitted first 
+            */
             return cachedResponse ? 
                 results$.pipe( startWith(cachedResponse)) :
                 results$;            
