@@ -19,12 +19,14 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { MessageService } from './message.service';
 import { RequestCache, RequestCacheWithMap } from './request-cache.service';
+import { UploaderComponent } from './uploader/uploader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfigComponent,
     MessagesComponent,
+    UploaderComponent,
     PackageSearchComponent
   ],
   imports: [
