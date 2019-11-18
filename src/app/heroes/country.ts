@@ -1,4 +1,4 @@
-export interface Hero {
+export interface Country {
   id: number;
   name: string;
 }
